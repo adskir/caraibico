@@ -52,8 +52,8 @@ img{max-width:100%;display:block}
 .hdr{position:sticky;top:0;z-index:50;background:var(--blue);color:#fff;box-shadow:0 2px 0 var(--red)}
 .hdr .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:62px}
 .logo{display:flex;align-items:center;gap:12px;text-decoration:none}
-.logo-plate{background:#fff;border-radius:8px;padding:1px 5px;height:42px;display:flex;align-items:center;box-shadow:0 6px 18px -8px rgba(0,0,0,.5)}
-.logo-plate img{height:40px;width:auto}
+.logo-plate{background:#fff;border-radius:8px;padding:1px 4px;height:54px;display:flex;align-items:center;box-shadow:0 6px 18px -8px rgba(0,0,0,.5)}
+.logo-plate img{height:52px;width:auto}
 .logo-plate .wm{display:none;font-family:var(--disp);font-size:1.35rem;color:var(--blue);line-height:1;white-space:nowrap}
 .logo-plate .wm b{color:var(--red);font-weight:400}
 .logo-plate.noimg img{display:none}.logo-plate.noimg .wm{display:block}
@@ -91,8 +91,8 @@ body.menu-open{overflow:hidden}
 .hero h1 .ser{display:block;font-size:.55em;color:var(--gold);line-height:1;margin:.08em 0 .02em}
 .hero .lede{font-size:clamp(1.05rem,1.7vw,1.25rem);max-width:30em;margin:22px 0 28px}
 .hero .cta{display:flex;flex-wrap:wrap;gap:12px}
-.chips{display:flex;flex-wrap:wrap;gap:10px;margin:26px 0 0;padding:0;list-style:none}
-.chips li{border:1.5px solid rgba(255,255,255,.4);border-radius:999px;padding:7px 14px;font-weight:700;font-size:.88rem;background:rgba(6,26,94,.4)}
+.strip-info{display:inline-flex;align-items:center;gap:12px;margin:26px 0 0;padding:9px 18px;border-radius:999px;background:rgba(6,26,94,.55);border:1.5px solid rgba(255,255,255,.35);font-weight:700;font-size:.92rem;white-space:nowrap;max-width:100%}
+.strip-info i{flex:none;width:9px;height:9px;background:var(--gold);clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
 .hero-photo{position:relative;justify-self:center;width:min(100%,430px)}
 .frame{position:relative;aspect-ratio:4/5;border-radius:220px 220px 26px 26px;overflow:hidden;border:8px solid #fff;background:var(--red);transform:rotate(3deg);box-shadow:0 30px 60px -24px rgba(0,0,0,.6)}
 .frame img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.15)}
@@ -183,7 +183,7 @@ section{padding-block:100px}
 .prezzi .stripes{opacity:.5}
 .prezzi .wrap{position:relative}
 .prezzi .kicker{color:var(--gold)}
-.price-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;align-items:stretch;max-width:820px}
+.price-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:stretch}
 .price{background:#fff;color:var(--ink);border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:12px}
 .price.top{background:var(--red);color:#fff;box-shadow:0 30px 50px -24px rgba(0,0,0,.6)}
 .price .name{font-size:.78rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase}
@@ -251,10 +251,11 @@ footer a{color:var(--gold)}
   body{font-size:16px}
   section{padding-block:70px}
   .hdr .wrap{min-height:56px}
-  .logo-plate{height:38px}.logo-plate img{height:36px}
+  .logo-plate{height:48px}.logo-plate img{height:46px}
   .tri{width:92vw;top:0;bottom:auto;height:520px}
   .tri .star{display:none}
-  .chips{display:none}
+  .strip-info{font-size:clamp(.66rem,3.1vw,.8rem);gap:7px;padding:8px 12px;margin-top:20px}
+  .strip-info i{width:7px;height:7px}
   .course::before{width:130px;height:130px;right:-40px;top:-40px}
   .hero .wrap{padding-top:40px;padding-bottom:70px}
   .hero-photo{width:82%}
@@ -309,7 +310,7 @@ footer a{color:var(--gold)}
           <a class="btn hero-cta" href="#contatti">Prenota la prima lezione</a>
           <a class="btn ghost" href="#orari">Vedi gli orari</a>
         </div>
-        <ul class="chips"><li>Corso base</li><li>Senza partner</li><li>Lun e mer · dalle 20:30</li></ul>
+        <p class="strip-info"><span>Corso base</span><i></i><span>Senza partner</span><i></i><span>Lun e mer · dalle 20:30</span></p>
       </div>
       <div class="hero-photo">
         <div class="frame"><img src="https://images.unsplash.com/photo-1575448913281-98e9e5d3f193?w=900&q=70&auto=format&fit=crop" alt="Coppia che balla salsa" width="900" height="1125" fetchpriority="high"></div>
@@ -415,6 +416,7 @@ footer a{color:var(--gold)}
       <div class="price-grid">
         <div class="price rv"><span class="name">Lezione di prova</span><span class="amt"><span class="ph">0 €</span></span><ul><li>Una lezione</li><li>Capisci il tuo livello</li><li>Nessun impegno</li></ul><a class="btn" href="#contatti">Prenota</a></div>
         <div class="price top rv"><span class="name">Abbonamento mensile</span><span class="amt"><span class="ph">€ —</span></span><ul><li>Corso caraibico</li><li>Lunedì e mercoledì</li><li>Due lezioni a settimana</li></ul><a class="btn white" href="#contatti">Inizia ora</a></div>
+        <div class="price rv"><span class="name">Lezioni individuali</span><span class="amt"><span class="ph">€ —</span></span><ul><li>Da solo o in coppia</li><li>Orario da concordare</li><li>Con un maestro della scuola</li></ul><a class="btn" href="#contatti">Chiedi info</a></div>
       </div>
     </div>
   </section>
@@ -451,7 +453,7 @@ footer a{color:var(--gold)}
         <h3 class="disp">Prenota la prova</h3>
         <div class="field"><label for="nome">Nome</label><input id="nome" autocomplete="given-name" required></div>
         <div class="field"><label for="corso">Quale corso vuoi provare?</label>
-          <select id="corso"><option>Caraibico adulti · base (lun e mer 20:30)</option><option>Caraibico ragazzi · base (lun e mer 20:30)</option><option>Caraibico ragazzi · intermedio (lun e mer 21:30)</option><option>Corso avanzato (martedì 21:00)</option><option>Balli di gruppo</option><option>Pilates (lun, mer, ven 19:00)</option><option>Non lo so ancora</option></select></div>
+          <select id="corso"><option>Caraibico adulti · base (lun e mer 20:30)</option><option>Caraibico ragazzi · base (lun e mer 20:30)</option><option>Caraibico ragazzi · intermedio (lun e mer 21:30)</option><option>Corso avanzato (martedì 21:00)</option><option>Balli di gruppo</option><option>Pilates (lun, mer, ven 19:00)</option><option>Lezioni individuali</option><option>Non lo so ancora</option></select></div>
         <button class="btn" type="submit">Invia su WhatsApp</button>
         <div class="msg" id="msg" aria-live="polite"></div>
         <p class="small">Si apre WhatsApp con il messaggio già scritto: devi solo premere invio.</p>
