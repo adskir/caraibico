@@ -50,21 +50,20 @@ img{max-width:100%;display:block}
 
 /* header */
 .hdr{position:sticky;top:0;z-index:50;background:var(--blue);color:#fff;box-shadow:0 2px 0 var(--red)}
-.hdr .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:84px}
+.hdr .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:62px}
 .logo{display:flex;align-items:center;gap:12px;text-decoration:none}
-.logo-plate{background:#fff;border-radius:12px;padding:4px 10px;height:66px;display:flex;align-items:center;box-shadow:0 6px 18px -8px rgba(0,0,0,.5)}
-.logo-plate img{height:58px;width:auto}
+.logo-plate{background:#fff;border-radius:10px;padding:3px 8px;height:50px;display:flex;align-items:center;box-shadow:0 6px 18px -8px rgba(0,0,0,.5)}
+.logo-plate img{height:44px;width:auto}
 .logo-plate .wm{display:none;font-family:var(--disp);font-size:1.35rem;color:var(--blue);line-height:1;white-space:nowrap}
 .logo-plate .wm b{color:var(--red);font-weight:400}
 .logo-plate.noimg img{display:none}.logo-plate.noimg .wm{display:block}
 .hdr-r{display:flex;align-items:center;gap:14px}
-.hdr-wa{padding:12px 20px;font-size:.92rem}
-.burger{width:54px;height:54px;border-radius:50%;border:0;background:#fff;cursor:pointer;display:grid;place-content:center;gap:6px;box-shadow:0 8px 20px -10px rgba(0,0,0,.6)}
-.burger span{display:block;width:24px;height:3px;border-radius:3px;background:var(--blue);transition:transform .25s,opacity .25s}
+.burger{width:44px;height:44px;border-radius:50%;border:0;background:#fff;cursor:pointer;display:grid;place-content:center;gap:6px;box-shadow:0 8px 20px -10px rgba(0,0,0,.6)}
+.burger span{display:block;width:20px;height:3px;border-radius:3px;background:var(--blue);transition:transform .25s,opacity .25s}
 .burger[aria-expanded="true"] span:nth-child(1){transform:translateY(9px) rotate(45deg)}
 .burger[aria-expanded="true"] span:nth-child(2){opacity:0}
 .burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-9px) rotate(-45deg)}
-.menu{position:fixed;inset:0;z-index:45;background:var(--red);color:#fff;overflow-y:auto;padding-top:120px;padding-bottom:40px}
+.menu{position:fixed;inset:0;z-index:45;background:var(--red);color:#fff;overflow-y:auto;padding-top:110px;padding-bottom:40px}
 .menu::before{content:"";position:fixed;inset:0;background:repeating-linear-gradient(-45deg,transparent 0 40px,rgba(255,255,255,.05) 40px 80px);pointer-events:none}
 .menu nav{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:2px}
 .menu nav>a{font-family:var(--disp);text-transform:uppercase;font-size:clamp(2.4rem,7vw,4.4rem);line-height:1.08;text-decoration:none;transition:color .2s,transform .2s}
@@ -95,7 +94,8 @@ body.menu-open{overflow:hidden}
 .chips li{border:1.5px solid rgba(255,255,255,.4);border-radius:999px;padding:7px 14px;font-weight:700;font-size:.88rem;background:rgba(6,26,94,.4)}
 .hero-photo{position:relative;justify-self:center;width:min(100%,430px)}
 .frame{position:relative;aspect-ratio:4/5;border-radius:220px 220px 26px 26px;overflow:hidden;border:8px solid #fff;background:var(--red);transform:rotate(3deg);box-shadow:0 30px 60px -24px rgba(0,0,0,.6)}
-.frame img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.15);mix-blend-mode:multiply}
+.frame img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.15)}
+.frame::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(228,0,43,.5),rgba(228,0,43,.25));pointer-events:none}
 .sticker{position:absolute;left:-26px;bottom:34px;background:var(--gold);color:var(--ink);border-radius:50%;width:132px;height:132px;display:grid;place-items:center;text-align:center;transform:rotate(-12deg);font-family:var(--disp);font-size:1.25rem;line-height:1;box-shadow:0 14px 26px -12px rgba(0,0,0,.6)}
 .sticker small{display:block;font-family:var(--body);font-weight:800;font-size:.68rem;letter-spacing:.1em;margin-top:4px}
 
@@ -148,13 +148,13 @@ section{padding-block:100px}
 .style-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
 .style{position:relative;border-radius:26px;overflow:hidden;aspect-ratio:3/4.2;background:var(--blue);color:#fff;display:flex;flex-direction:column;justify-content:flex-end;padding:22px;isolation:isolate;transition:transform .3s}
 .style:hover{transform:translateY(-6px) rotate(-1deg)}
-.style img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;filter:grayscale(1) contrast(1.2);mix-blend-mode:screen;opacity:.55}
+.style img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;filter:grayscale(1) contrast(1.2);opacity:.35}
 .style::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,transparent 35%,rgba(6,26,94,.92))}
 .style:nth-child(2){background:#fff;color:var(--blue)}
-.style:nth-child(2) img{mix-blend-mode:multiply;opacity:.35}
+.style:nth-child(2) img{opacity:.3}
 .style:nth-child(2)::after{background:linear-gradient(180deg,transparent 35%,rgba(255,255,255,.95))}
 .style:nth-child(3){background:var(--gold);color:var(--ink)}
-.style:nth-child(3) img{mix-blend-mode:multiply;opacity:.45}
+.style:nth-child(3) img{opacity:.3}
 .style:nth-child(3)::after{background:linear-gradient(180deg,transparent 35%,rgba(255,201,60,.95))}
 .style .tag{position:absolute;top:18px;left:18px;font-size:.72rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;background:var(--red);color:#fff;border-radius:999px;padding:5px 10px}
 .style h3{font-size:clamp(2rem,2.6vw,2.6rem);overflow-wrap:anywhere}
@@ -250,8 +250,8 @@ footer a{color:var(--gold)}
 @media (max-width:620px){
   body{font-size:16px}
   section{padding-block:70px}
-  .hdr-wa{display:none}
-  .logo-plate{height:50px}.logo-plate img{height:42px}
+  .hdr .wrap{min-height:56px}
+  .logo-plate{height:44px}.logo-plate img{height:38px}
   .tri{width:92vw;top:0;bottom:auto;height:520px}
   .tri .star{display:none}
   .course::before{width:130px;height:130px;right:-40px;top:-40px}
@@ -270,15 +270,13 @@ footer a{color:var(--gold)}
 </head>
 <body>
 
-<div class="demo">Sito in fase di sviluppo · <a href="https://clickbari.it" target="_blank" rel="noopener">clickbari.it</a></div>
-
 <header class="hdr">
+  <div class="demo">Sito in fase di sviluppo · <a href="https://clickbari.it" target="_blank" rel="noopener">clickbari.it</a></div>
   <div class="wrap">
     <a class="logo" href="#top" aria-label="Grupo Habana">
       <span class="logo-plate"><picture><source srcset="/img/logo.webp" type="image/webp"><img src="/img/logo.png" alt="Grupo Habana · A.S.D. Escuela de baile en Bari" width="788" height="442"></picture></span>
     </a>
     <div class="hdr-r">
-      <a class="btn hdr-wa" href="https://wa.me/393317395591" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.3.5-.4.5c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.7-.1l.9-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>Scrivici</a>
       <button class="burger" id="burger" type="button" aria-label="Apri il menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
     </div>
   </div>
