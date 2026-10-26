@@ -107,7 +107,7 @@ body.menu-open{overflow:hidden}
 .ticker span::after{content:"";width:24px;height:24px;background:var(--red);clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
 @keyframes mq{to{transform:translateX(-50%)}}
 
-section{padding-block:100px}
+section{padding-block:100px;scroll-margin-top:86px}
 
 /* hook principianti */
 .hook{background:var(--sand)}
@@ -135,7 +135,18 @@ section{padding-block:100px}
 .vid h2{font-size:clamp(3rem,7vw,6rem);margin:14px 0 18px}
 .vid h2 .ser{display:block;color:var(--gold);font-size:.7em}
 .vid p{font-size:1.1rem;max-width:26em;margin:0 0 26px;color:#E3E8FF}
-.phone{background:#000;border:10px solid #fff;border-radius:36px;overflow:hidden;aspect-ratio:9/16;box-shadow:0 40px 70px -30px rgba(0,0,0,.8);transform:rotate(2deg)}
+.vslider{min-width:0}
+.vtrack{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding:14px 0 24px}
+.vtrack::-webkit-scrollbar{display:none}
+.slide{flex:0 0 100%;scroll-snap-align:center;display:flex;justify-content:center;padding:0 10px}
+.phone{width:100%;background:#000;border:10px solid #fff;border-radius:36px;overflow:hidden;aspect-ratio:9/16;box-shadow:0 30px 60px -30px rgba(0,0,0,.8)}
+.vnav{display:flex;align-items:center;justify-content:center;gap:16px}
+.varr{width:48px;height:48px;border-radius:50%;border:2px solid #fff;background:transparent;color:#fff;font-size:1.3rem;font-weight:800;cursor:pointer}
+.varr:hover{background:#fff;color:var(--blue)}
+.varr:disabled{opacity:.35;cursor:default;background:transparent;color:#fff}
+.vdots{display:flex;gap:8px}
+.vdots button{width:10px;height:10px;border-radius:999px;border:0;padding:0;background:rgba(255,255,255,.4);cursor:pointer;transition:width .25s,background .25s}
+.vdots button[aria-current="true"]{width:28px;background:var(--gold)}
 .phone video{width:100%;height:100%;object-fit:cover;display:block;background:#000}
 
 /* stili */
@@ -245,7 +256,7 @@ footer a{color:var(--gold)}
   .hero-txt{padding-left:0}
   .tri{width:70vw;opacity:.9}
   .hook .wrap,.faq .wrap,.contact .wrap,.vid .wrap{grid-template-columns:1fr}
-  .phone{max-width:360px;justify-self:center;width:100%}
+  .vslider{max-width:380px;justify-self:center;width:100%}
   .style-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .price-grid{grid-template-columns:1fr}
 }
@@ -356,13 +367,26 @@ footer a{color:var(--gold)}
       <div class="vid-txt rv">
         <span class="kicker">Una sera da noi</span>
         <h2 class="disp">Così si balla <span class="ser">al Grupo Habana</span></h2>
-        <p>Un video girato durante una lezione di caraibico, così com'è: musica, coppie che cambiano e tante risate.</p>
+        <p>Video girati durante le nostre lezioni, così come sono: musica, passi e tante risate. Scorri per vederli tutti.</p>
         <a class="btn white" href="#contatti">Vieni a provare</a>
       </div>
-      <div class="phone rv">
-        <video controls playsinline preload="none" poster="/video/lezione-poster.jpg" width="720" height="1280">
-          <source src="/video/lezione.mp4" type="video/mp4">
-        </video>
+      <div class="vslider rv" aria-roledescription="carousel" aria-label="Video delle lezioni">
+        <div class="vtrack" id="vtrack">
+          <div class="slide" role="group" aria-roledescription="slide" aria-label="Video 1 di 3">
+            <div class="phone"><video controls playsinline preload="none" poster="/video/lezione-poster.jpg" width="720" height="1280"><source src="/video/lezione.mp4" type="video/mp4"></video></div>
+          </div>
+          <div class="slide" role="group" aria-roledescription="slide" aria-label="Video 2 di 3">
+            <div class="phone"><video controls playsinline preload="none" poster="/video/lezione-2-poster.jpg" width="720" height="1280"><source src="/video/lezione-2.mp4" type="video/mp4"></video></div>
+          </div>
+          <div class="slide" role="group" aria-roledescription="slide" aria-label="Video 3 di 3">
+            <div class="phone"><video controls playsinline preload="none" poster="/video/lezione-3-poster.jpg" width="720" height="1280"><source src="/video/lezione-3.mp4" type="video/mp4"></video></div>
+          </div>
+        </div>
+        <div class="vnav">
+          <button type="button" class="varr" id="vprev" aria-label="Video precedente">&#8592;</button>
+          <div class="vdots" id="vdots"><button type="button" aria-label="Video 1"></button><button type="button" aria-label="Video 2"></button><button type="button" aria-label="Video 3"></button></div>
+          <button type="button" class="varr" id="vnext" aria-label="Video successivo">&#8594;</button>
+        </div>
       </div>
     </div>
   </section>
@@ -480,6 +504,18 @@ footer a{color:var(--gold)}
   b.addEventListener('click', function(){ setMenu(m.hidden); });
   m.addEventListener('click', function(e){ if (e.target.closest('a')) setMenu(false); });
   document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !m.hidden) { setMenu(false); b.focus(); } });
+  var vt = document.getElementById('vtrack');
+  if (vt) {
+    var slides = vt.querySelectorAll('.slide'), dots = document.querySelectorAll('#vdots button'), prev = document.getElementById('vprev'), next = document.getElementById('vnext'), cur = 0;
+    function go(i){ i = Math.max(0, Math.min(slides.length - 1, i)); vt.scrollTo({left: slides[i].offsetLeft - slides[0].offsetLeft, behavior: 'smooth'}); }
+    function mark(i){ cur = i; dots.forEach(function(d, k){ d.setAttribute('aria-current', String(k === i)); }); prev.disabled = i === 0; next.disabled = i === slides.length - 1;
+      vt.querySelectorAll('video').forEach(function(v, k){ if (k !== i && !v.paused) v.pause(); }); }
+    prev.addEventListener('click', function(){ go(cur - 1); });
+    next.addEventListener('click', function(){ go(cur + 1); });
+    dots.forEach(function(d, k){ d.addEventListener('click', function(){ go(k); }); });
+    var t; vt.addEventListener('scroll', function(){ clearTimeout(t); t = setTimeout(function(){ mark(Math.round(vt.scrollLeft / vt.clientWidth)); }, 80); }, {passive:true});
+    mark(0);
+  }
   document.getElementById('form').addEventListener('submit', function(e){
     e.preventDefault();
     var n = document.getElementById('nome').value.trim();
