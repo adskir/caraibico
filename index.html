@@ -147,7 +147,14 @@ section{padding-block:100px;scroll-margin-top:86px}
 .vdots{display:flex;gap:8px}
 .vdots button{width:10px;height:10px;border-radius:999px;border:0;padding:0;background:rgba(255,255,255,.4);cursor:pointer;transition:width .25s,background .25s}
 .vdots button[aria-current="true"]{width:28px;background:var(--gold)}
-.phone video{width:100%;height:100%;object-fit:cover;display:block;background:#000}
+.phone{position:relative}
+.phone video,.vposter,.vposter img{position:absolute;inset:0;width:100%;height:100%;display:block}
+.phone video{object-fit:contain;background:#000}
+.vposter{border:0;padding:0;margin:0;background:#000;cursor:pointer}
+.vposter img{object-fit:cover}
+.vplay{position:absolute;left:50%;top:50%;width:84px;height:84px;margin:-42px 0 0 -42px;border-radius:50%;background:var(--red);display:grid;place-items:center;box-shadow:0 0 0 10px rgba(255,255,255,.35),0 16px 30px -10px rgba(0,0,0,.7);transition:transform .2s}
+.vplay svg{width:38px;height:38px;fill:#fff;margin-left:5px}
+.vposter:hover .vplay{transform:scale(1.08)}
 
 /* stili */
 .styles{background:var(--red);color:#fff;position:relative;overflow:hidden}
@@ -373,13 +380,13 @@ footer a{color:var(--gold)}
       <div class="vslider rv" aria-roledescription="carousel" aria-label="Video delle lezioni">
         <div class="vtrack" id="vtrack">
           <div class="slide" role="group" aria-roledescription="slide" aria-label="Video 1 di 3">
-            <div class="phone"><video controls playsinline preload="none" poster="/video/lezione-poster.jpg?v=2" width="720" height="1280"><source src="/video/lezione.mp4" type="video/mp4"></video></div>
+            <div class="phone"><button type="button" class="vposter" data-src="/video/lezione.mp4" aria-label="Guarda il video 1"><img src="/video/lezione-poster.jpg?v=2" alt="" width="720" height="1280" loading="eager" decoding="async"><span class="vplay" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></button></div>
           </div>
           <div class="slide" role="group" aria-roledescription="slide" aria-label="Video 2 di 3">
-            <div class="phone"><video controls playsinline preload="none" poster="/video/lezione-2-poster.jpg?v=2" width="720" height="1280"><source src="/video/lezione-2.mp4" type="video/mp4"></video></div>
+            <div class="phone"><button type="button" class="vposter" data-src="/video/lezione-2.mp4" aria-label="Guarda il video 2"><img src="/video/lezione-2-poster.jpg?v=2" alt="" width="720" height="1280" loading="lazy" decoding="async"><span class="vplay" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></button></div>
           </div>
           <div class="slide" role="group" aria-roledescription="slide" aria-label="Video 3 di 3">
-            <div class="phone"><video controls playsinline preload="none" poster="/video/lezione-3-poster.jpg?v=2" width="720" height="1280"><source src="/video/lezione-3.mp4" type="video/mp4"></video></div>
+            <div class="phone"><button type="button" class="vposter" data-src="/video/lezione-3.mp4" aria-label="Guarda il video 3"><img src="/video/lezione-3-poster.jpg?v=2" alt="" width="720" height="1280" loading="lazy" decoding="async"><span class="vplay" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></button></div>
           </div>
         </div>
         <div class="vnav">
@@ -504,6 +511,14 @@ footer a{color:var(--gold)}
   b.addEventListener('click', function(){ setMenu(m.hidden); });
   m.addEventListener('click', function(e){ if (e.target.closest('a')) setMenu(false); });
   document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !m.hidden) { setMenu(false); b.focus(); } });
+  document.querySelectorAll('.vposter').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var v = document.createElement('video');
+      v.src = btn.dataset.src; v.controls = true; v.playsInline = true; v.setAttribute('playsinline', ''); v.autoplay = true;
+      btn.parentNode.replaceChild(v, btn);
+      var p = v.play(); if (p && p.catch) p.catch(function(){});
+    });
+  });
   var vt = document.getElementById('vtrack');
   if (vt) {
     var slides = vt.querySelectorAll('.slide'), dots = document.querySelectorAll('#vdots button'), prev = document.getElementById('vprev'), next = document.getElementById('vnext'), cur = 0;
