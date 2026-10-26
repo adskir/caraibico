@@ -50,16 +50,28 @@ img{max-width:100%;display:block}
 
 /* header */
 .hdr{position:sticky;top:0;z-index:50;background:var(--blue);color:#fff;box-shadow:0 2px 0 var(--red)}
-.hdr .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:74px}
+.hdr .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:84px}
 .logo{display:flex;align-items:center;gap:12px;text-decoration:none}
-.logo-plate{background:#fff;border-radius:14px;padding:5px 10px;height:54px;display:flex;align-items:center;box-shadow:0 6px 18px -8px rgba(0,0,0,.5)}
-.logo-plate img{height:44px;width:auto}
+.logo-plate{background:#fff;border-radius:12px;padding:4px 10px;height:66px;display:flex;align-items:center;box-shadow:0 6px 18px -8px rgba(0,0,0,.5)}
+.logo-plate img{height:58px;width:auto}
 .logo-plate .wm{display:none;font-family:var(--disp);font-size:1.35rem;color:var(--blue);line-height:1;white-space:nowrap}
 .logo-plate .wm b{color:var(--red);font-weight:400}
 .logo-plate.noimg img{display:none}.logo-plate.noimg .wm{display:block}
-.nav{display:flex;align-items:center;gap:26px}
-.nav a{text-decoration:none;font-weight:700;font-size:.95rem}
-.nav a:not(.btn):hover{color:var(--gold)}
+.hdr-r{display:flex;align-items:center;gap:14px}
+.hdr-wa{padding:12px 20px;font-size:.92rem}
+.burger{width:54px;height:54px;border-radius:50%;border:0;background:#fff;cursor:pointer;display:grid;place-content:center;gap:6px;box-shadow:0 8px 20px -10px rgba(0,0,0,.6)}
+.burger span{display:block;width:24px;height:3px;border-radius:3px;background:var(--blue);transition:transform .25s,opacity .25s}
+.burger[aria-expanded="true"] span:nth-child(1){transform:translateY(9px) rotate(45deg)}
+.burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+.burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-9px) rotate(-45deg)}
+.menu{position:fixed;inset:0;z-index:45;background:var(--red);color:#fff;overflow-y:auto;padding-top:120px;padding-bottom:40px}
+.menu::before{content:"";position:fixed;inset:0;background:repeating-linear-gradient(-45deg,transparent 0 40px,rgba(255,255,255,.05) 40px 80px);pointer-events:none}
+.menu nav{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:2px}
+.menu nav>a{font-family:var(--disp);text-transform:uppercase;font-size:clamp(2.4rem,7vw,4.4rem);line-height:1.08;text-decoration:none;transition:color .2s,transform .2s}
+.menu nav>a:hover{color:var(--gold);transform:translateX(8px)}
+.menu-foot{margin-top:26px;font-weight:700;color:#FFE1E6}
+.menu-foot a{color:var(--gold)}
+body.menu-open{overflow:hidden}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font:800 1rem var(--body);text-decoration:none;cursor:pointer;border:0;background:var(--red);color:#fff;padding:16px 26px;border-radius:999px;box-shadow:0 12px 26px -12px rgba(228,0,43,.9);transition:transform .2s}
 .btn:hover{transform:translateY(-2px)}
 .btn svg{width:20px;height:20px;fill:currentColor;flex:none}
@@ -141,12 +153,17 @@ section{padding-block:100px}
 .orari .kicker{color:var(--red)}
 .orari h2{color:var(--blue)}
 .sched{display:grid;gap:14px}
-.slot{display:grid;grid-template-columns:200px minmax(0,1fr) auto;gap:20px;align-items:center;background:#fff;border-radius:22px;padding:20px 26px;box-shadow:0 18px 36px -28px rgba(10,20,64,.6);border-left:10px solid var(--blue)}
+.sched-h{font-family:var(--disp);font-weight:400;text-transform:uppercase;font-size:1.6rem;color:var(--red);margin:34px 0 14px}
+.sched-h:first-of-type{margin-top:0}
+.sched-2 .slot{border-left-color:var(--gold)}
+.sched-note{margin-top:22px;color:var(--ink-2);font-weight:600}
+.slot .what small{display:block}
+.slot{display:grid;grid-template-columns:210px minmax(0,1fr) auto;gap:20px;align-items:center;background:#fff;border-radius:22px;padding:20px 26px;box-shadow:0 18px 36px -28px rgba(10,20,64,.6);border-left:10px solid var(--blue)}
 .slot.hot{border-left-color:var(--red)}
-.slot .day{font-family:var(--disp);font-size:1.7rem;text-transform:uppercase;color:var(--blue);line-height:1}
+.slot .day{font-family:var(--disp);font-size:1.5rem;text-transform:uppercase;color:var(--blue);line-height:1}
 .slot .what b{display:block;font-size:1.2rem}
 .slot .what small{color:var(--ink-2);font-weight:600}
-.slot .time{font-family:var(--disp);font-size:2.6rem;line-height:1;color:var(--red)}
+.slot .time{font-family:var(--disp);font-size:clamp(1.6rem,3vw,2.4rem);white-space:nowrap;line-height:1;color:var(--red)}
 .slot .lvl{display:inline-block;margin-top:4px;font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;background:var(--red);color:#fff;border-radius:999px;padding:3px 9px}
 
 /* prezzi */
@@ -210,7 +227,6 @@ footer a{color:var(--gold)}
 .rv.in{opacity:1;transform:none}
 
 @media (max-width:1020px){
-  .nav a:not(.btn){display:none}
   .hero .wrap{grid-template-columns:1fr;padding-top:50px}
   .hero-txt{padding-left:0}
   .tri{width:70vw;opacity:.9}
@@ -222,8 +238,8 @@ footer a{color:var(--gold)}
 @media (max-width:620px){
   body{font-size:16px}
   section{padding-block:70px}
-  .nav .btn{display:none}
-  .logo-plate{height:48px}.logo-plate img{height:38px}
+  .hdr-wa{display:none}
+  .logo-plate{height:50px}.logo-plate img{height:42px}
   .tri{width:92vw;top:0;bottom:auto;height:520px}
   .tri .star{display:none}
   .course::before{width:130px;height:130px;right:-40px;top:-40px}
@@ -247,18 +263,27 @@ footer a{color:var(--gold)}
 <header class="hdr">
   <div class="wrap">
     <a class="logo" href="#top" aria-label="Grupo Habana">
-      <span class="logo-plate" id="logoPlate"><img src="/img/logo.png" alt="Grupo Habana" onerror="this.parentNode.classList.add('noimg')"><span class="wm">Grupo <b>Habana</b></span></span>
+      <span class="logo-plate"><picture><source srcset="/img/logo.webp" type="image/webp"><img src="/img/logo.png" alt="Grupo Habana · A.S.D. Escuela de baile en Bari" width="788" height="442"></picture></span>
     </a>
-    <nav class="nav" aria-label="Menu">
-      <a href="#principianti">Principianti</a>
-      <a href="#stili">Stili</a>
-      <a href="#orari">Orari</a>
-      <a href="#prezzi">Prezzi</a>
-      <a href="#contatti">Dove siamo</a>
-      <a class="btn" href="#contatti"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.3.5-.4.5c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.7-.1l.9-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>Scrivici</a>
-    </nav>
+    <div class="hdr-r">
+      <a class="btn hdr-wa" href="https://wa.me/393317395591" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.3.5-.4.5c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.7-.1l.9-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>Scrivici</a>
+      <button class="burger" id="burger" type="button" aria-label="Apri il menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
+    </div>
   </div>
 </header>
+
+<div class="menu" id="menu" hidden>
+  <nav class="wrap" aria-label="Menu">
+    <a href="#top">Home</a>
+    <a href="#principianti">Corso base</a>
+    <a href="#stili">Stili</a>
+    <a href="#orari">Orari</a>
+    <a href="#prezzi">Prezzi</a>
+    <a href="#faq">Domande</a>
+    <a href="#contatti">Dove siamo</a>
+    <p class="menu-foot">Via Monte San Michele 145, Bari · <a href="https://wa.me/393317395591" target="_blank" rel="noopener">WhatsApp 331 739 5591</a></p>
+  </nav>
+</div>
 
 <main id="top">
   <section class="hero" style="padding:0">
@@ -268,12 +293,12 @@ footer a{color:var(--gold)}
       <div class="hero-txt">
         <span class="kicker" style="color:var(--gold)"><svg viewBox="0 0 100 100"><path d="M50 2l14 32 35 3-26 23 8 34-31-18-31 18 8-34L1 37l35-3z"/></svg>Balli caraibici · Bari</span>
         <h1 class="disp" style="margin-top:14px">Balla<span class="ser">come all'Avana.</span>A Bari.</h1>
-        <p class="lede">Salsa cubana, bachata e rueda de casino in Via Monte San Michele. Vieni anche se non hai mai ballato e anche senza partner: in sala si cambia coppia di continuo.</p>
+        <p class="lede">Salsa cubana, bachata e kizomba in Via Monte San Michele. Vieni anche se non hai mai ballato e anche senza partner: in sala si cambia coppia di continuo.</p>
         <div class="cta">
           <a class="btn" href="#contatti">Prenota la prima lezione</a>
           <a class="btn ghost" href="#orari">Vedi gli orari</a>
         </div>
-        <ul class="chips"><li>Corso principianti</li><li>Senza partner</li><li>Lun e mer · 20:30</li></ul>
+        <ul class="chips"><li>Corso base</li><li>Senza partner</li><li>Lun e mer · dalle 20:30</li></ul>
       </div>
       <div class="hero-photo">
         <div class="frame"><img src="https://images.unsplash.com/photo-1575448913281-98e9e5d3f193?w=900&q=70&auto=format&fit=crop" alt="Coppia che balla salsa" width="900" height="1125" fetchpriority="high"></div>
@@ -283,24 +308,24 @@ footer a{color:var(--gold)}
   </section>
 
   <div class="ticker" aria-hidden="true"><div class="track">
-    <span>Salsa cubana</span><span>Bachata</span><span>Rueda de casino</span><span>Son cubano</span><span>Reggaeton</span><span>¡Vamos a bailar!</span>
-    <span>Salsa cubana</span><span>Bachata</span><span>Rueda de casino</span><span>Son cubano</span><span>Reggaeton</span><span>¡Vamos a bailar!</span>
+    <span>Salsa cubana</span><span>Bachata sensual</span><span>Kizomba</span><span>Salsa portoricana</span><span>Reggaeton</span><span>Dancehall</span><span>Hip hop</span><span>Balli di gruppo</span>
+    <span>Salsa cubana</span><span>Bachata sensual</span><span>Kizomba</span><span>Salsa portoricana</span><span>Reggaeton</span><span>Dancehall</span><span>Hip hop</span><span>Balli di gruppo</span>
   </div></div>
 
   <section class="hook" id="principianti">
     <div class="wrap">
       <div class="rv">
-        <span class="kicker" style="color:var(--red)">Nuovo corso principianti</span>
+        <span class="kicker" style="color:var(--red)">Corso base · caraibico</span>
         <h2 class="disp" style="margin:16px 0 22px">Mai ballato? <em>Perfetto.</em></h2>
-        <p>Il corso principianti parte dai passi base e dal ritmo. Nessuno ti guarda male se sbagli: ci siamo passati tutti. Dopo qualche settimana balli già alle serate.</p>
+        <p>Il corso base parte dai passi e dal ritmo. Nessuno ti guarda male se sbagli: ci siamo passati tutti. Dopo qualche settimana balli già alle serate.</p>
         <p>Vieni da solo o con un amico: le coppie si formano in sala.</p>
       </div>
       <div class="course rv">
-        <span class="kicker">Corso principianti</span>
+        <span class="kicker">Caraibico · base</span>
         <h3 class="disp">Due sere a settimana</h3>
         <div class="when">
-          <div><b>Lun</b><small>ore 20:30</small></div>
-          <div><b>Mer</b><small>ore 20:30</small></div>
+          <div><b>Lun</b><small>dalle 20:30</small></div>
+          <div><b>Mer</b><small>dalle 20:30</small></div>
         </div>
         <ul>
           <li>Non serve il partner</li>
@@ -317,12 +342,12 @@ footer a{color:var(--gold)}
     <div class="wrap">
       <div class="sec-head rv">
         <div><span class="kicker">Gli stili</span><h2 class="disp" style="margin-top:12px">Scegli il <span class="ser">tuo</span> ritmo</h2></div>
-        <p>Si comincia da uno, poi si scoprono gli altri. Il cuore della scuola è la salsa cubana.</p>
+        <p>Si comincia da uno, poi si scoprono gli altri. E in più: salsa portoricana, dancehall, hip hop, salsa fitness, baby dance e baby salsa.</p>
       </div>
       <div class="style-grid">
         <article class="style rv"><img loading="lazy" src="https://images.unsplash.com/photo-1504609813442-a8924e83f76e?w=700&q=70&auto=format&fit=crop" alt=""><span class="tag">Energia</span><h3 class="disp">Salsa cubana</h3><p>Giri, figure e tanta allegria.</p></article>
-        <article class="style rv"><img loading="lazy" src="https://images.unsplash.com/photo-1545959570-a94084071b5d?w=700&q=70&auto=format&fit=crop" alt=""><span class="tag">Romantica</span><h3 class="disp">Bachata</h3><p>Morbida, perfetta per chi inizia.</p></article>
-        <article class="style rv"><img loading="lazy" src="https://images.unsplash.com/photo-1555489401-79c274997434?w=700&q=70&auto=format&fit=crop" alt=""><span class="tag">In gruppo</span><h3 class="disp">Rueda</h3><p>La salsa in cerchio: cambi coppia e ridi.</p></article>
+        <article class="style rv"><img loading="lazy" src="https://images.unsplash.com/photo-1545959570-a94084071b5d?w=700&q=70&auto=format&fit=crop" alt=""><span class="tag">Romantica</span><h3 class="disp">Bachata sensual</h3><p>Morbida e fluida, piace subito.</p></article>
+        <article class="style rv"><img loading="lazy" src="https://images.unsplash.com/photo-1555489401-79c274997434?w=700&q=70&auto=format&fit=crop" alt=""><span class="tag">Connessione</span><h3 class="disp">Kizomba</h3><p>Lenta, intensa, tutta ascolto.</p></article>
         <article class="style rv"><img loading="lazy" src="https://images.unsplash.com/photo-1575449235878-6de79c4c8ef4?w=700&q=70&auto=format&fit=crop" alt=""><span class="tag">Senza partner</span><h3 class="disp">Reggaeton</h3><p>Da soli, a tempo, a tutto volume.</p></article>
       </div>
     </div>
@@ -332,14 +357,24 @@ footer a{color:var(--gold)}
     <div class="wrap">
       <div class="sec-head rv">
         <div><span class="kicker">Orari</span><h2 class="disp" style="margin-top:12px">La tua settimana <span class="ser">in pista</span></h2></div>
-        <p>Corsi serali. Non sai il tuo livello? Vieni a provare e lo scopriamo insieme.</p>
+        <p>Non sai il tuo livello? Vieni a provare e lo scopriamo insieme.</p>
       </div>
-      <div class="sched">
-        <div class="slot hot rv"><span class="day">Lunedì</span><span class="what"><b>Corso principianti</b><span class="lvl">Nuovo</span></span><span class="time">20:30</span></div>
-        <div class="slot hot rv"><span class="day">Mercoledì</span><span class="what"><b>Corso principianti</b><span class="lvl">Nuovo</span></span><span class="time">20:30</span></div>
-        <div class="slot rv"><span class="day"><span class="ph">Giorno</span></span><span class="what"><b><span class="ph">Altri corsi: intermedi, avanzati…</span></b><small>Da completare con la scuola</small></span><span class="time"><span class="ph">--:--</span></span></div>
-        <div class="slot rv"><span class="day"><span class="ph">Giorno</span></span><span class="what"><b><span class="ph">Serata social</span></b><small>Da completare con la scuola</small></span><span class="time"><span class="ph">--:--</span></span></div>
-      </div>
+      <h3 class="sched-h">Balli caraibici</h3>
+<div class="sched">
+<div class="slot hot rv"><span class="day">Lun · Mer</span><span class="what"><b>Caraibico adulti · base</b><small>Maestri Mada e Piero</small><span class="lvl">Si parte da zero</span></span><span class="time">20:30–22:00</span></div>
+<div class="slot hot rv"><span class="day">Lun · Mer</span><span class="what"><b>Caraibico ragazzi · base</b><small>Maestri Giorgio e Marjore</small><span class="lvl">Si parte da zero</span></span><span class="time">20:30–21:30</span></div>
+<div class="slot rv"><span class="day">Lun · Mer</span><span class="what"><b>Caraibico ragazzi · intermedio</b><small>Maestri Giorgio e Marjore</small></span><span class="time">21:30–22:30</span></div>
+<div class="slot rv"><span class="day">Martedì</span><span class="what"><b>Corso avanzato</b></span><span class="time">21:00</span></div>
+</div>
+<h3 class="sched-h">Fitness e balli di gruppo</h3>
+<div class="sched sched-2">
+<div class="slot rv"><span class="day">Lun · Mer · Ven</span><span class="what"><b>Balli di gruppo</b><small>Maestra Tina Calò</small></span><span class="time">17:00–18:00</span></div>
+<div class="slot rv"><span class="day">Lun · Mer · Ven</span><span class="what"><b>Balli di gruppo</b><small>Maestra Teresa Cacchione</small></span><span class="time">18:00–19:00</span></div>
+<div class="slot rv"><span class="day">Lun · Mer · Ven</span><span class="what"><b>Pilates</b><small>Maestra Chiara Morgese</small></span><span class="time">19:00–20:00</span></div>
+<div class="slot rv"><span class="day">Mar · Gio</span><span class="what"><b>Balli di gruppo · mattina</b><small>Maestra Tina Calò</small></span><span class="time">9:20–10:20</span></div>
+<div class="slot rv"><span class="day">Mer · Ven</span><span class="what"><b>Balli di gruppo · mattina</b><small>Maestra Tina Calò</small></span><span class="time">10:00–11:00</span></div>
+</div>
+<p class="sched-note">Affittiamo anche la sala per eventi e conferenze e organizziamo feste di compleanno.</p>
     </div>
   </section>
 
@@ -352,7 +387,7 @@ footer a{color:var(--gold)}
       </div>
       <div class="price-grid">
         <div class="price rv"><span class="name">Prova</span><span class="amt"><span class="ph">0 €</span></span><ul><li>Una lezione</li><li>Capisci il tuo livello</li><li>Nessun impegno</li></ul><a class="btn" href="#contatti">Prenota</a></div>
-        <div class="price top rv"><span class="name">Mensile</span><span class="amt"><span class="ph">€ —</span></span><ul><li>Corso principianti</li><li>Lunedì e mercoledì</li><li>Gruppo WhatsApp del corso</li></ul><a class="btn white" href="#contatti">Inizia ora</a></div>
+        <div class="price top rv"><span class="name">Mensile</span><span class="amt"><span class="ph">€ —</span></span><ul><li>Corso caraibico</li><li>Lunedì e mercoledì</li><li>Gruppo WhatsApp del corso</li></ul><a class="btn white" href="#contatti">Inizia ora</a></div>
         <div class="price rv"><span class="name">Studenti</span><span class="amt"><span class="ph">€ —</span></span><ul><li>Con tessera universitaria</li><li><span class="ph">Convenzione ESN / CRAL?</span></li></ul><a class="btn" href="#contatti">Chiedi info</a></div>
       </div>
       <p class="note">Quota associativa e assicurazione: <span class="ph">da confermare</span>.</p>
@@ -379,7 +414,7 @@ footer a{color:var(--gold)}
         <h2 class="disp" style="margin-top:12px">Il primo passo <span class="ser">è il più facile</span></h2>
         <div class="info-l">
           <div><small>Dove</small><span>Via Monte San Michele 145, Bari</span></div>
-          <div><small>Corso principianti</small><span>Lunedì e mercoledì, ore 20:30</span></div>
+          <div><small>Corso base caraibico</small><span>Lunedì e mercoledì, dalle 20:30</span></div>
           <div><small>WhatsApp</small><span>331 739 5591</span></div>
         </div>
         <p style="margin-top:24px;display:flex;flex-wrap:wrap;gap:12px">
@@ -391,9 +426,9 @@ footer a{color:var(--gold)}
         <h3 class="disp">Prenota la prova</h3>
         <div class="field"><label for="nome">Nome</label><input id="nome" autocomplete="given-name" required></div>
         <div class="field"><label for="giorno">Quando vuoi venire?</label>
-          <select id="giorno"><option>Lunedì alle 20:30</option><option>Mercoledì alle 20:30</option><option>Non lo so ancora</option></select></div>
+          <select id="giorno"><option>Lunedì sera</option><option>Mercoledì sera</option><option>Non lo so ancora</option></select></div>
         <div class="field"><label for="stile">Cosa vuoi provare?</label>
-          <select id="stile"><option>Salsa cubana</option><option>Bachata</option><option>Rueda de casino</option><option>Reggaeton</option><option>Non lo so ancora</option></select></div>
+          <select id="stile"><option>Caraibico (salsa, bachata)</option><option>Kizomba</option><option>Reggaeton</option><option>Balli di gruppo</option><option>Pilates</option><option>Non lo so ancora</option></select></div>
         <button class="btn" type="submit">Invia su WhatsApp</button>
         <div class="msg" id="msg" aria-live="polite"></div>
         <p class="small">Si apre WhatsApp con il messaggio già scritto: devi solo premere invio.</p>
@@ -414,10 +449,15 @@ footer a{color:var(--gold)}
 
 <script>
 (function(){
+  var b = document.getElementById('burger'), m = document.getElementById('menu');
+  function setMenu(open){ m.hidden = !open; b.setAttribute('aria-expanded', String(open)); b.setAttribute('aria-label', open ? 'Chiudi il menu' : 'Apri il menu'); document.body.classList.toggle('menu-open', open); }
+  b.addEventListener('click', function(){ setMenu(m.hidden); });
+  m.addEventListener('click', function(e){ if (e.target.closest('a')) setMenu(false); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !m.hidden) { setMenu(false); b.focus(); } });
   document.getElementById('form').addEventListener('submit', function(e){
     e.preventDefault();
     var n = document.getElementById('nome').value.trim();
-    var txt = 'Ciao! ' + (n ? 'Sono ' + n + '. ' : '') + 'Vorrei provare una lezione di ' + document.getElementById('stile').value.toLowerCase() + '. Quando: ' + document.getElementById('giorno').value.toLowerCase() + '.';
+    var txt = 'Ciao! ' + (n ? 'Sono ' + n + '. ' : '') + 'Vorrei provare: ' + document.getElementById('stile').value.toLowerCase() + '. Quando: ' + document.getElementById('giorno').value.toLowerCase() + '.';
     var m = document.getElementById('msg'); m.textContent = txt; m.classList.add('show');
     window.open('https://wa.me/393317395591?text=' + encodeURIComponent(txt), '_blank', 'noopener');
   });
