@@ -139,7 +139,12 @@ section{padding-block:100px;scroll-margin-top:86px}
 .vtrack{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding:14px 0 24px}
 .vtrack::-webkit-scrollbar{display:none}
 .slide{flex:0 0 100%;scroll-snap-align:center;display:flex;justify-content:center;padding:0 10px}
-.phone{width:100%;background:#000;border:10px solid #fff;border-radius:36px;overflow:hidden;aspect-ratio:9/16;box-shadow:0 30px 60px -30px rgba(0,0,0,.8)}
+.phone{position:relative;width:100%;padding:11px;border-radius:50px;background:linear-gradient(145deg,#2b2d33,#0c0c0e 40%,#1b1c20);box-shadow:inset 0 0 0 2px #45474f,inset 0 0 0 4px #0a0a0b,0 0 0 1.5px rgba(255,255,255,.28),0 30px 60px -28px rgba(0,0,0,.85)}
+.phone::before{content:"";position:absolute;z-index:3;top:24px;left:50%;width:31%;height:24px;margin-left:-15.5%;border-radius:999px;background:#000;box-shadow:inset 0 0 0 1px #1c1d21}
+.phone::after{content:"";position:absolute;right:-3px;top:23%;width:3px;height:64px;border-radius:0 3px 3px 0;background:#3a3c43;box-shadow:-1px 0 0 #222}
+.screen{position:relative;aspect-ratio:9/16;border-radius:40px;overflow:hidden;background:#000}
+.slide{position:relative}
+.slide .phone{max-width:100%}
 .vnav{display:flex;align-items:center;justify-content:center;gap:16px}
 .varr{width:48px;height:48px;border-radius:50%;border:2px solid #fff;background:transparent;color:#fff;font-size:1.3rem;font-weight:800;cursor:pointer}
 .varr:hover{background:#fff;color:var(--blue)}
@@ -147,9 +152,8 @@ section{padding-block:100px;scroll-margin-top:86px}
 .vdots{display:flex;gap:8px}
 .vdots button{width:10px;height:10px;border-radius:999px;border:0;padding:0;background:rgba(255,255,255,.4);cursor:pointer;transition:width .25s,background .25s}
 .vdots button[aria-current="true"]{width:28px;background:var(--gold)}
-.phone{position:relative}
-.phone video,.vposter,.vposter img{position:absolute;inset:0;width:100%;height:100%;display:block}
-.phone video{object-fit:contain;background:#000}
+.screen video,.vposter,.vposter img{position:absolute;inset:0;width:100%;height:100%;display:block}
+.screen video{object-fit:contain;background:#000}
 .vposter{border:0;padding:0;margin:0;background:#000;cursor:pointer}
 .vposter img{object-fit:cover}
 .vplay{position:absolute;left:50%;top:50%;width:84px;height:84px;margin:-42px 0 0 -42px;border-radius:50%;background:var(--red);display:grid;place-items:center;box-shadow:0 0 0 10px rgba(255,255,255,.35),0 16px 30px -10px rgba(0,0,0,.7);transition:transform .2s}
@@ -380,13 +384,13 @@ footer a{color:var(--gold)}
       <div class="vslider rv" aria-roledescription="carousel" aria-label="Video delle lezioni">
         <div class="vtrack" id="vtrack">
           <div class="slide" role="group" aria-roledescription="slide" aria-label="Video 1 di 3">
-            <div class="phone"><button type="button" class="vposter" data-src="/video/lezione.mp4" aria-label="Guarda il video 1"><img src="/video/lezione-poster.jpg?v=2" alt="" width="720" height="1280" loading="eager" decoding="async"><span class="vplay" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></button></div>
+            <div class="phone"><div class="screen"><button type="button" class="vposter" data-src="/video/lezione.mp4" aria-label="Guarda il video 1"><img src="/video/lezione-poster.jpg?v=2" alt="" width="720" height="1280" loading="eager" decoding="async"><span class="vplay" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></button></div></div>
           </div>
           <div class="slide" role="group" aria-roledescription="slide" aria-label="Video 2 di 3">
-            <div class="phone"><button type="button" class="vposter" data-src="/video/lezione-2.mp4" aria-label="Guarda il video 2"><img src="/video/lezione-2-poster.jpg?v=2" alt="" width="720" height="1280" loading="lazy" decoding="async"><span class="vplay" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></button></div>
+            <div class="phone"><div class="screen"><button type="button" class="vposter" data-src="/video/lezione-2.mp4" aria-label="Guarda il video 2"><img src="/video/lezione-2-poster.jpg?v=2" alt="" width="720" height="1280" loading="lazy" decoding="async"><span class="vplay" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></button></div></div>
           </div>
           <div class="slide" role="group" aria-roledescription="slide" aria-label="Video 3 di 3">
-            <div class="phone"><button type="button" class="vposter" data-src="/video/lezione-3.mp4" aria-label="Guarda il video 3"><img src="/video/lezione-3-poster.jpg?v=2" alt="" width="720" height="1280" loading="lazy" decoding="async"><span class="vplay" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></button></div>
+            <div class="phone"><div class="screen"><button type="button" class="vposter" data-src="/video/lezione-3.mp4" aria-label="Guarda il video 3"><img src="/video/lezione-3-poster.jpg?v=2" alt="" width="720" height="1280" loading="lazy" decoding="async"><span class="vplay" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></button></div></div>
           </div>
         </div>
         <div class="vnav">
